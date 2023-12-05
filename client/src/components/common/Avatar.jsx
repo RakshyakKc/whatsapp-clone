@@ -58,7 +58,7 @@ function Avatar({ type, image, setImage }) {
       },
     },
   ];
-  const PhotoPickerChange = async (e) => {
+  const photoPickerChange = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     const data = document.createElement("img");
@@ -128,7 +128,7 @@ function Avatar({ type, image, setImage }) {
           hidePhotoLibrary={setShowPhotoLibrary}
         />
       )}
-      {grabPhoto && <PhotoPicker onChange={PhotoPickerChange} />}
+      {grabPhoto && <PhotoPicker onChange={photoPickerChange} />}
     </>
   );
 }

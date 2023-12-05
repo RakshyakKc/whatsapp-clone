@@ -59,9 +59,7 @@ function Main() {
   useEffect(() => {
     if (userInfo) {
       socket.current = io(HOST);
-      console.log("add user eseEffect", userInfo, HOST);
       socket.current.emit("add-user", userInfo.id);
-      console.log("socket info", socket);
       dispatch({ type: reducerCases.SET_SOCKET, socket });
     }
   }, [userInfo]);
