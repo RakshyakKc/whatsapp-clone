@@ -10,12 +10,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Chat from "./Chat/Chat";
+import SearchMessages from "./Chat/SearchMessages";
 import ChatList from "./Chatlist/ChatList";
 import Empty from "./Empty";
 
 function Main() {
   const router = useRouter();
-  const [{ userInfo, currentChatUser }, dispatch] = useStateProvider();
+  const [{ userInfo, currentChatUser, messageSearch }, dispatch] =
+    useStateProvider();
   const [redirectLogin, setRedirectLogin] = useState(false);
   const [socketEvent, setSocketEvent] = useState(false);
 
@@ -92,7 +94,14 @@ function Main() {
   return (
     <div className="grid grid-cols-main h-screen w-screen max-h-screen max-w-full overflow-hidden">
       <ChatList />
-      {currentChatUser ? <Chat /> : <Empty />}
+      {currentChatUser ? (
+        <div className={messageSearch ? "grid grid-cols-2" : "grid-cols-2"}>
+          <Chat />
+          {messageSearch && <SearchMessages />}
+        </div>
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 }
